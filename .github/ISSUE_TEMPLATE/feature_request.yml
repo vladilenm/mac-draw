@@ -1,0 +1,14 @@
+name: Предложение
+description: Идея улучшения Mac Draw
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Какую задачу хотите решить?
+      description: Опишите ситуацию, в которой текущих возможностей не хватает.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Как это могло бы работать?

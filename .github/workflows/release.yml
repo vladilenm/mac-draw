@@ -1,0 +1,100 @@
+name: Check, build and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Checks (${{ matrix.runner }})
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Check toolchain and scripts
+        run: |
+          swift --version
+          bash -n scripts/build.sh scripts/package.sh scripts/test.sh
+          plutil -lint Resources/Info.plist
+      - name: Geometry, rendering and window checks
+        run: ./scripts/test.sh
+
+  package:
+    name: Universal app
+    needs: check
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Build arm64 + x86_64 archive
+        run: ./scripts/package.sh
+      - name: Verify archive checksums
+        working-directory: dist
+        run: shasum -a 256 -c SHA256SUMS.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: mac-draw-macos-universal
+          path: |
+            dist/MacDraw-universal.zip
+            dist/INSTALL.txt
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish tagged release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: mac-draw-macos-universal
+          path: dist
+      - name: Check version and release notes
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, plistlib
+          version = plistlib.loads(pathlib.Path('Resources/Info.plist').read_bytes())['CFBundleShortVersionString']
+          tag = os.environ['RELEASE_TAG']
+          assert tag == f'v{version}', f'Tag {tag} does not match app version {version}'
+          assert pathlib.Path(f'docs/releases/{tag}.md').is_file(), 'Release notes are missing'
+          PY
+          cd dist
+          sha256sum -c SHA256SUMS.txt
+      - name: Publish archive, instructions and checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            dist/MacDraw-universal.zip dist/INSTALL.txt dist/SHA256SUMS.txt \
+            --verify-tag --title "Mac Draw $RELEASE_TAG" \
+            --notes-file "docs/releases/$RELEASE_TAG.md"

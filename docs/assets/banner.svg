@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#161D2A"/><stop offset="1" stop-color="#0B1019"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.73" cy="0.35" r="0.65">
+      <stop stop-color="#24C8EC" stop-opacity=".1"/><stop offset="1" stop-color="#24C8EC" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#AAB8CA" opacity=".12"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="640" rx="28" fill="url(#bg)"/>
+  <rect width="1600" height="640" rx="28" fill="url(#glow)"/>
+  <rect x="790" y="56" width="730" height="528" fill="url(#dots)"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif">
+    <rect x="76" y="76" width="64" height="64" rx="17" fill="#24C8EC"/>
+    <path d="M95 119l4-17 19-19 12 12-19 19-16 5z" stroke="#101720" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M112 89l12 12M99 103l11 11" stroke="#101720" stroke-width="4"/>
+    <text x="164" y="118" fill="#ADBDCF" font-size="25" font-weight="500" letter-spacing="3">MACOS · FREE · OPEN SOURCE</text>
+    <text x="72" y="265" fill="#F4F7FB" font-size="110" font-weight="700" letter-spacing="-5">Mac Draw</text>
+    <text x="78" y="332" fill="#BDCBDD" font-size="34">Рисуйте поверх экрана.</text>
+    <text x="78" y="381" fill="#BDCBDD" font-size="34">Объясняйте наглядно.</text>
+    <path d="M80 401c130 8 239-7 347-2" stroke="#24C8EC" stroke-width="6" stroke-linecap="round"/>
+    <rect x="78" y="488" width="146" height="56" rx="13" fill="#202B3B" stroke="#364457"/>
+    <text x="151" y="525" fill="#EEF6FF" font-size="26" text-anchor="middle" font-weight="600">⌃ ⌥ D</text>
+    <text x="244" y="525" fill="#91A2B8" font-size="23">Вызвать. Нарисовать. Показать.</text>
+  </g>
+  <!-- An illustration of the drawing tools, not a screenshot of the application. -->
+  <g transform="translate(856 112)">
+    <rect width="584" height="70" rx="20" fill="#202A39" stroke="#3B4B61"/>
+    <g fill="#63758D">
+      <circle cx="22" cy="29" r="2"/><circle cx="22" cy="41" r="2"/>
+      <circle cx="29" cy="29" r="2"/><circle cx="29" cy="41" r="2"/>
+    </g>
+    <circle cx="66" cy="35" r="12" fill="#24C8EC"/>
+    <circle cx="106" cy="35" r="12" fill="#FB5C99"/>
+    <circle cx="146" cy="35" r="12" fill="#4FD78D"/>
+    <circle cx="186" cy="35" r="12" fill="#FFD85A"/>
+    <circle cx="226" cy="35" r="12" fill="#B591FF"/>
+    <path d="M262 20v30" stroke="#46566B"/>
+    <rect x="277" y="11" width="48" height="48" rx="12" fill="#24C8EC" fill-opacity=".14"/>
+    <g stroke="#CFD9E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M291 45l20-20m-16 0h16v16" stroke="#24C8EC"/>
+      <path d="M343 42c6-24 9 9 16-8s7-7 8-4"/>
+      <rect x="391" y="25" width="25" height="20" rx="3"/>
+      <circle cx="455" cy="35" r="12"/>
+      <path d="M492 24h23m-12 0v23"/>
+      <path d="M543 29l12 12m0-12l-12 12"/>
+    </g>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M875 290c38-15 79-8 112-13l11 120c-41-2-81 6-123 0z" stroke="#B591FF" stroke-width="6"/>
+    <path d="M1033 366c72-2 58-102 164-104m-29-24l33 22-25 28" stroke="#24C8EC" stroke-width="7"/>
+    <path d="M1234 256c-9-50 36-72 103-61 52 9 74 45 48 83-25 38-108 40-143 10-32-28-19-60 4-74" stroke="#24C8EC" stroke-width="6"/>
+    <path d="M1117 480c26-11 42-29 56-46m-41 9l42-10-4 40" stroke="#FB5C99" stroke-width="6"/>
+    <path d="M1235 405c20 4 27 10 38 25 5-26 20-42 40-57" stroke="#4FD78D" stroke-width="7"/>
+    <path d="M1349 471l9-24 8 24 26 2-21 17 6 25-20-14-22 13 7-25-19-17z" stroke="#FFD85A" stroke-width="5"/>
+  </g>
+  <circle cx="1454" cy="346" r="5" fill="#24C8EC"/>
+  <circle cx="1035" cy="502" r="4" fill="#B591FF"/>
+</svg>

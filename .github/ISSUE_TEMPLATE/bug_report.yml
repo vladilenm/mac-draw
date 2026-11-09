@@ -1,0 +1,23 @@
+name: Ошибка
+description: Что-то не работает в Mac Draw
+title: '[Ошибка] '
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: Ваш Mac и версия приложения
+      placeholder: MacBook Air M2, macOS 15.7.7, Mac Draw 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как повторить
+      description: Опишите шаги, ожидаемый результат и что получилось вместо него.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Дополнительно
+      description: Число дисплеев, программа записи, скриншот или короткое видео. Уберите личные данные перед публикацией.
